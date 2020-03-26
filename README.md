@@ -1,3 +1,3 @@
-# node-econnreset
+# NODE ECONNRESET
 
-Node ECONNRESET
+Script to reproduce Node ECONNRESET error
