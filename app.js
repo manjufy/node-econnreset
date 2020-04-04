@@ -1,7 +1,17 @@
+/**
+ * Reference: https://github.com/nodejs/node/issues/27916
+ * $> cd node-econnreset
+ * $> node app.js
+ */
 const http = require('http')
 
 const server = http.createServer(function (req, res) {
-//   res.end()
+  req.on('data', () => {})
+  setTimeout(() => {
+    // Prematurely ending the request. Usually due to a 5xx error.
+    res.statusCode = 200
+    res.end()
+  }, 1000)
 })
 
 server.listen(0, function () {
@@ -11,7 +21,10 @@ server.listen(0, function () {
     path: '/'
   })
   req.on('response', res => {
-    req.write(Buffer.alloc(32))
+    console.log("!", res.statusCode)
+    clearInterval(interval)
   })
-  req.write(Buffer.alloc(32))
+  const interval = setInterval(() => {
+    req.write(Buffer.alloc(32))
+  }, 1000)
 })
