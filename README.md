@@ -15,3 +15,7 @@ Make sure to have node installed in your machine
 - Open the index.js and fill up the connection to your DB
 - node index.js
 ```
+
+### References:
+
+Server Implementation: https://github.com/joyent/manta-muskie/blob/master/lib/server.js
